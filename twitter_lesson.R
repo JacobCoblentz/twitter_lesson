@@ -52,4 +52,4 @@ full_dat<-full_dat[!is.na(full_dat$lat),]
 full_dat<-full_dat[!is.na(full_dat$lon),]
 us_map<-get_map(location="USA", zoom=4)
 require(ggrepel)
-map<-ggmap(us_map)+geom_jitter(data = full_dat, aes(x=lon, y=lat, size=retweet_count, color=sentiment)) + scale_color_gradient2(low="blue",mid="grey", high="red")
+map<-ggmap(us_map)+geom_jitter(data = full_dat, aes(x=lon, y=lat, size=retweet_count, color=sentiment)) + scale_color_gradient2(low="blue",mid="grey", high="red") + geom_label_repel(data=full_dat[full_dat$favorite_count>1000,],aes(x=lon, y=lat, label=screen_name))
